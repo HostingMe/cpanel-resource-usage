@@ -4,7 +4,7 @@
  * Plugin Name: cPanel Resource Usage
  * Plugin URI: https://github.com/HostingMe/cpanel-resource-usage
  * Description: A simple plugin that adds your cPanel accounts server usage to the WordPress dashboard.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Hosting Me
  * Author URI: https://hostingme.co.uk/
  * License: MIT
@@ -91,6 +91,25 @@ function cpanel_resource_usage_function() {
           $cpu_total = $item['maximum'];
           $cpu_usage = $item['usage'];
         }
+        if ($item['id'] == 'bandwidth') {
+           $bandwidth_total = $item['maximum'];
+           $bandwidth_usage = $item['usage'];
+           $bandwidth_percentage = round(($bandwidth_usage / $bandwidth_total) * 100, 2);
+           $bandwidth_total = round($bandwidth_total / (1024 * 1024 * 1024), 2) . ' GB';
+           if ($bandwidth_usage >= 1024 * 1024 * 1024) {
+              
+               // Convert bytes to GB
+               $bandwidth_usage = round($bandwidth_usage / (1024 * 1024 * 1024), 2) . ' GB';
+           } elseif ($bandwidth_usage >= 1024 * 1024) {
+               
+               // Convert bytes to MB
+               $bandwidth_usage = round($bandwidth_usage / (1024 * 1024), 2) . ' MB';
+           } else {
+               
+               // Display in bytes
+               $bandwidth_usage = $bandwidth_usage . ' bytes';
+           }
+         }
         
         if ($item['id'] == 'lvememphy') {
           $mem_total = $item['maximum'];
@@ -171,6 +190,15 @@ function cpanel_resource_usage_function() {
         <div class="bg-blue-400 h-2.5 rounded-full" style="width: <?=$entry_percentage?>%"></div>
       </div>
     </section>
+    <section class="py-2">
+        <div class="flex justify-between">
+          <span class="font-bold font-slate-800 mb-2">Bandwidth:</span>
+          <span class="font-slate-200 font-xs"><?=$bandwidth_usage?></span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div class="bg-orange-400 h-2.5 rounded-full" style="width: <?=$bandwidth_percentage?>%"></div>
+        </div>
+      </section>
     <?php 
 }
 
