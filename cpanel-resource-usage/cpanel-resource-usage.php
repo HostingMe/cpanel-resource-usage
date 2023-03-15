@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Plugin Name: cPanel Resource Usage
+ * Plugin URI: https://github.com/HostingMe/cpanel-resource-usage
+ * Description: A simple plugin that adds your cPanel accounts server usage to the WordPress dashboard.
+ * Version: 1.0.1
+ * Author: Hosting Me
+ * Author URI: https://hostingme.co.uk/
+ * License: MIT
+ */
 
 function cpanel_resource_usage_widgets() {
    wp_add_dashboard_widget(
