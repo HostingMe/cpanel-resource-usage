@@ -196,7 +196,7 @@ function cpanel_resource_usage_function() {
           <span class="font-slate-200 font-xs"><?=$bandwidth_usage?></span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-2.5">
-          <div class="bg-orange-400 h-2.5 rounded-full" style="width: <?=$bandwidth_percentage?>%"></div>
+          <div class="bg-blue-400 h-2.5 rounded-full" style="width: <?=$bandwidth_percentage?>%"></div>
         </div>
       </section>
     <?php 
