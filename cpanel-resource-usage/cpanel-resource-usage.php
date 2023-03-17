@@ -226,14 +226,14 @@ function render_settings_page() {
 add_action('admin_init', 'register_settings');
 function register_settings() {
     register_setting('settings_group', 'api_key');
-    register_setting('settings_group', 'username');
     register_setting('settings_group', 'hostname');
+    register_setting('settings_group', 'username');
     
     add_settings_section('general_section', '', 'render_general_section', 'cpanel-resource-usage-settings');
     
     add_settings_field('api_key_field', 'API Key', 'render_api_key_field', 'cpanel-resource-usage-settings', 'general_section');
-    add_settings_field('username_field', 'Username', 'render_username_field', 'cpanel-resource-usage-settings', 'general_section');
     add_settings_field('hostname_field', 'Hostname', 'render_hostname_field', 'cpanel-resource-usage-settings', 'general_section');
+    add_settings_field('username_field', 'Username', 'render_username_field', 'cpanel-resource-usage-settings', 'general_section');
 }
 
 // Render the settings fields
@@ -249,18 +249,18 @@ function render_api_key_field() {
     <?php
 }
 
+function render_hostname_field() {
+    $hostname = get_option('hostname');
+    ?>
+    <input type="text" name="hostname" value="<?php echo esc_attr($hostname); ?>" />
+    <p class="description">Enter your cPanel URL without the https://</p>
+    <?php
+}
+
 function render_username_field() {
     $username = get_option('username');
     ?>
     <input type="text" name="username" value="<?php echo esc_attr($username); ?>" />
     <p class="description">Enter your cPanel username here.</p>
-    <?php
-}
-
-function render_hostname_field() {
-    $hostname = get_option('hostname');
-    ?>
-    <input type="text" name="hostname" value="<?php echo esc_attr($hostname); ?>" />
-    <p class="description">Enter your cPanel url without the https://</p>
     <?php
 }
